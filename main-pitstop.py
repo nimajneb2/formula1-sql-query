@@ -5,15 +5,15 @@ import sys
 
 conn = sqlite3.connect('f1db.sqlite')
 cur = conn.cursor()
-drivername = None
-count = 0
+#drivername = None
+#count = 0
 time = 0.0
 minutes = 0
 seconds = 0.0
 minutes1 = 0
 seconds1 = 0.0
 cur.execute('SELECT code, forname, surname FROM Drivers')
-dlist = list()
+
 
 
 def isdcodeinpt(driverid):
@@ -109,7 +109,7 @@ if len(driver) == 3:
         elif driver not in dinput[0] : 
             continue
         else:
-            count = count +1
+            #count = count +1
             dupedriver.append(dinput)
             fullname = dinput[1] + " " + dinput[2]
 else:
@@ -124,9 +124,14 @@ if len(dupedriver) > 1:
     userinput = input("please enter number for driver above: ")
     try:
         userinput = int(userinput)
+        print(len(dupedriver))
+        if userinput > len(dupedriver) -1:
+            print("Driver not found")
+            sys.exit()        
         driver = dupedriver[userinput][0]
         fullname = dupedriver[userinput][1] + " " + dupedriver[userinput][2]
         pitdriver = dupedriver[userinput][3]
+
         print("duped",driver)
     except ValueError:
         print("Please run program again, no valid input recieved")
